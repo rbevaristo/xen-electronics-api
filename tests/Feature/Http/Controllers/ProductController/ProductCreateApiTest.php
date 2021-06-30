@@ -3,7 +3,9 @@
 namespace Tests\Feature\Http\Controllers\ProductController;
 
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use phpDocumentor\Reflection\Types\Void_;
 use Tests\TestCase;
 
 class ProductCreateApiTest extends TestCase
@@ -12,6 +14,9 @@ class ProductCreateApiTest extends TestCase
 
     public function test_error_message_for_required_fields()
     {
+        $user = User::factory()->create();
+        $this->actingAs($user, 'api');
+
         $jsonData = [];
 
         $response = $this->post('/api/products', $jsonData);
@@ -30,6 +35,9 @@ class ProductCreateApiTest extends TestCase
 
     public function test_error_message_for_non_numeric_fields()
     {
+        $user = User::factory()->create();
+        $this->actingAs($user, 'api');
+
         $jsonData = [
             'name' => 'test name',
             'price' => 'test',
@@ -52,6 +60,9 @@ class ProductCreateApiTest extends TestCase
 
     public function test_category_does_not_exist()
     {
+        $user = User::factory()->create();
+        $this->actingAs($user, 'api');
+
         $jsonData = [
             'name' => 'test name',
             'price' => 0,
@@ -70,6 +81,9 @@ class ProductCreateApiTest extends TestCase
 
     public function test_product_already_exist()
     {
+
+        $user = User::factory()->create();
+        $this->actingAs($user, 'api');
 
         $category = Category::create(['name' => 'test category', 'sort' => 0]);
 
@@ -98,6 +112,9 @@ class ProductCreateApiTest extends TestCase
 
     public function test_can_create_product()
     {
+        $user = User::factory()->create();
+        $this->actingAs($user, 'api');
+
         $category = Category::create(['name' => 'test category', 'sort' => 0]);
 
         $jsonData = [

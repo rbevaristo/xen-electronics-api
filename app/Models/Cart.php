@@ -19,6 +19,8 @@ class Cart extends Model
         'product_id',
     ];
 
+    public $timestamps = false;
+
     public function user() {
         return $this->belongsTo(User::class);
     }

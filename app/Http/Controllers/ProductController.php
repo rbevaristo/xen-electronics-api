@@ -114,7 +114,7 @@ class ProductController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    public function validateProductRequest(Request $request)
+    private function validateProductRequest(Request $request)
     {
         return Validator::make($request->all(), [
             'name' => 'required|string',
