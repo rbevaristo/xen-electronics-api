@@ -41,6 +41,11 @@ DB_PASSWORD=
 php artisan migrate
 ```
 
+* Create Passport keys
+```
+php artisan passport:install
+```
+
 * Load Seeder Files, if seeder files did not work run `composer dump-autoload`
 ```
 php artisan db:seed
